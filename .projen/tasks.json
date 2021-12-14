@@ -117,6 +117,69 @@
         }
       ]
     },
+    "integ:foobar:assert": {
+      "name": "integ:foobar:assert",
+      "description": "assert the snapshot of integration test 'foobar'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/foobar.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'foobar'. Run 'projen integ:foobar:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/foobar.integ.ts\" --no-version-reporting --context aws-cdk:enableDiffNoFail=true --context @aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId=true --context @aws-cdk/core:enableStackNameDuplicates=true --context @aws-cdk/core:stackRelativeExports=true --context @aws-cdk/aws-ecr-assets:dockerIgnoreSupport=true --context @aws-cdk/aws-secretsmanager:parseOwnedSecretName=true --context @aws-cdk/aws-kms:defaultKeyPolicies=true --context @aws-cdk/aws-s3:grantWriteWithoutAcl=true --context @aws-cdk/aws-ecs-patterns:removeDefaultDesiredCount=true --context @aws-cdk/aws-rds:lowercaseDbIdentifier=true --context @aws-cdk/aws-efs:defaultEncryptionAtRest=true --context @aws-cdk/aws-lambda:recognizeVersionProps=true --context @aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021=true --context @aws-cdk/core:newStyleStackSynthesis=true -o test/.tmp/foobar.integ/synth.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/foobar.integ.snapshot/ test/.tmp/foobar.integ/synth.cdk.out/"
+        }
+      ]
+    },
+    "integ:foobar:deploy": {
+      "name": "integ:foobar:deploy",
+      "description": "deploy integration test 'foobar' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/.tmp/foobar.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/foobar.integ.ts\" --no-version-reporting --context aws-cdk:enableDiffNoFail=true --context @aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId=true --context @aws-cdk/core:enableStackNameDuplicates=true --context @aws-cdk/core:stackRelativeExports=true --context @aws-cdk/aws-ecr-assets:dockerIgnoreSupport=true --context @aws-cdk/aws-secretsmanager:parseOwnedSecretName=true --context @aws-cdk/aws-kms:defaultKeyPolicies=true --context @aws-cdk/aws-s3:grantWriteWithoutAcl=true --context @aws-cdk/aws-ecs-patterns:removeDefaultDesiredCount=true --context @aws-cdk/aws-rds:lowercaseDbIdentifier=true --context @aws-cdk/aws-efs:defaultEncryptionAtRest=true --context @aws-cdk/aws-lambda:recognizeVersionProps=true --context @aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021=true --context @aws-cdk/core:newStyleStackSynthesis=true --require-approval=never -o test/.tmp/foobar.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/foobar.integ.snapshot"
+        },
+        {
+          "exec": "mv test/.tmp/foobar.integ/deploy.cdk.out test/foobar.integ.snapshot"
+        },
+        {
+          "spawn": "integ:foobar:destroy"
+        }
+      ]
+    },
+    "integ:foobar:destroy": {
+      "name": "integ:foobar:destroy",
+      "description": "destroy integration test 'foobar'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/foobar.integ.snapshot --no-version-reporting"
+        }
+      ]
+    },
+    "integ:foobar:snapshot": {
+      "name": "integ:foobar:snapshot",
+      "description": "update snapshot for integration test \"foobar\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/foobar.integ.ts\" --no-version-reporting --context aws-cdk:enableDiffNoFail=true --context @aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId=true --context @aws-cdk/core:enableStackNameDuplicates=true --context @aws-cdk/core:stackRelativeExports=true --context @aws-cdk/aws-ecr-assets:dockerIgnoreSupport=true --context @aws-cdk/aws-secretsmanager:parseOwnedSecretName=true --context @aws-cdk/aws-kms:defaultKeyPolicies=true --context @aws-cdk/aws-s3:grantWriteWithoutAcl=true --context @aws-cdk/aws-ecs-patterns:removeDefaultDesiredCount=true --context @aws-cdk/aws-rds:lowercaseDbIdentifier=true --context @aws-cdk/aws-efs:defaultEncryptionAtRest=true --context @aws-cdk/aws-lambda:recognizeVersionProps=true --context @aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021=true --context @aws-cdk/core:newStyleStackSynthesis=true -o test/foobar.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:foobar:watch": {
+      "name": "integ:foobar:watch",
+      "description": "watch integration test 'foobar' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/foobar.integ.ts\" --no-version-reporting --context aws-cdk:enableDiffNoFail=true --context @aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId=true --context @aws-cdk/core:enableStackNameDuplicates=true --context @aws-cdk/core:stackRelativeExports=true --context @aws-cdk/aws-ecr-assets:dockerIgnoreSupport=true --context @aws-cdk/aws-secretsmanager:parseOwnedSecretName=true --context @aws-cdk/aws-kms:defaultKeyPolicies=true --context @aws-cdk/aws-s3:grantWriteWithoutAcl=true --context @aws-cdk/aws-ecs-patterns:removeDefaultDesiredCount=true --context @aws-cdk/aws-rds:lowercaseDbIdentifier=true --context @aws-cdk/aws-efs:defaultEncryptionAtRest=true --context @aws-cdk/aws-lambda:recognizeVersionProps=true --context @aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021=true --context @aws-cdk/core:newStyleStackSynthesis=true -o test/.tmp/foobar.integ/deploy.cdk.out"
+        }
+      ]
+    },
     "package": {
       "name": "package",
       "description": "Creates the distribution package",
@@ -172,6 +235,9 @@
         },
         {
           "spawn": "eslint"
+        },
+        {
+          "spawn": "integ:foobar:assert"
         }
       ]
     },
@@ -234,7 +300,7 @@
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib constructs eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii jsii-diff jsii-docgen jsii-pacmak json-schema npm-check-updates standard-version ts-jest typescript aws-cdk-lib constructs"
+          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib constructs eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii jsii-diff jsii-docgen jsii-pacmak json-schema npm-check-updates standard-version ts-jest ts-node typescript aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"

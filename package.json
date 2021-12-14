@@ -13,6 +13,11 @@
     "default": "npx projen default",
     "docgen": "npx projen docgen",
     "eslint": "npx projen eslint",
+    "integ:foobar:assert": "npx projen integ:foobar:assert",
+    "integ:foobar:deploy": "npx projen integ:foobar:deploy",
+    "integ:foobar:destroy": "npx projen integ:foobar:destroy",
+    "integ:foobar:snapshot": "npx projen integ:foobar:snapshot",
+    "integ:foobar:watch": "npx projen integ:foobar:watch",
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "pre-compile": "npx projen pre-compile",
@@ -53,6 +58,7 @@
     "projen": "^0.43.0",
     "standard-version": "^9",
     "ts-jest": "^27.1.1",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {

@@ -50,4 +50,15 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+test/foobar.integ.snapshot/asset.*
+test/foobar.integ.snapshot/**/asset.*
+test/foobar.integ.snapshot/cdk.out
+test/foobar.integ.snapshot/**/cdk.out
+test/foobar.integ.snapshot/manifest.json
+test/foobar.integ.snapshot/**/manifest.json
+test/foobar.integ.snapshot/tree.json
+test/foobar.integ.snapshot/**/tree.json
+test/.tmp/foobar.integ/deploy.cdk.out
+test/.tmp/foobar.integ/synth.cdk.out
+!test/foobar.integ.snapshot
 !/.github/workflows/upgrade-main.yml
