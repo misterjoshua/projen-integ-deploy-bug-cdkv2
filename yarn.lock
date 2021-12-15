@@ -153,9 +153,9 @@
     js-tokens "^4.0.0"
 
 "@babel/parser@^7.1.0", "@babel/parser@^7.14.7", "@babel/parser@^7.16.0", "@babel/parser@^7.16.5", "@babel/parser@^7.7.2":
-  version "7.16.5"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.16.5.tgz#beb3af702e54d24796341ab9420fb329131ad658"
-  integrity sha512-+Ce7T5iPNWzfu9C1aB5tN3Lyafs5xb3Ic7vBWyZL2KXT3QSdD1dD3CvgOzPmQKoNNRt6uauc0XwNJTQtXC2/Mw==
+  version "7.16.6"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.16.6.tgz#8f194828193e8fa79166f34a4b4e52f3e769a314"
+  integrity sha512-Gr86ujcNuPDnNOY8mi383Hvi8IYrJVJYuf3XcuBM/Dgd+bINn/7tHqsj+tKkoreMbmGsFLsltI/JJd8fOFWGDQ==
 
 "@babel/plugin-syntax-async-generators@^7.8.4":
   version "7.8.4"
@@ -4849,10 +4849,10 @@ progress@^2.0.0, progress@^2.0.3:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-projen@^0.43.0:
-  version "0.43.0"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.43.0.tgz#e80f5c5b6c4c3aa90953eca3be9d271807114778"
-  integrity sha512-cV6AgPdvUIvZmDQBsQ4k8917lvmfDeddzPjFGt3Lui7VYllFSL101PgIk4tXGP2XCpE2QCGGg9fDsSz5Vsk3lQ==
+projen@^0.43.2:
+  version "0.43.2"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.43.2.tgz#b13445faa6da04b47807a74f79f341a2eed877de"
+  integrity sha512-zdv+PgB1/CZ7HQSOqytFkQuUOBzWLdluc4vso8TwlxRXo3+QJCq+DB9HKX5GP8fb1s9Qm9qwUiaxd/eIevt0rw==
   dependencies:
     "@iarna/toml" "^2.2.5"
     case "^1.6.3"
